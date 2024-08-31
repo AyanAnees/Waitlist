@@ -7,7 +7,8 @@ import { Input } from "@/components/ui/input";
 import { CheckIcon, ChevronRightIcon } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
+import Features from "@/components/Features";
 
 export default function Home() {
     const [subscribed, setSubscribed] = useState(false);
@@ -43,20 +44,22 @@ export default function Home() {
     return (
         <>
             <Header />
-            <div className="relative h-[500px] w-full  overflow-hidden bg-background p-20 pt-16">
+
+            {/* Hero Section */}
+            <div className="relative h-[500px] w-full  overflow-hidden bg-background p-6 sm:p-20 pt-16">
                 <div className="flex flex-col items-center justify-start gap-2 z-10">
-                    <p className="text-md font-bold text-center text-muted-foreground uppercase">
+                    <p className="text-md font-bold text-center w-full text-muted-foreground uppercase">
                         one-stop solution to build your project portfolio
                     </p>
-                    <h2 className="pointer-events-none whitespace-pre-wrap bg-gradient-to-b from-[#F97D26] via-[#ff2975] to-[#8c1eff] bg-clip-text text-center text-5xl font-bold tracking-tight text-transparent max-w-lg pb-4">
+                    <h2 className="pointer-events-none lowercase whitespace-pre-wrap bg-gradient-to-b from-[#F97D26] via-[#ff2975] to-[#8c1eff] bg-clip-text text-center text-4xl sm:text-5xl font-bold tracking-tight text-transparent w-full sm:max-w-lg pb-8">
                         Innovate Together, Learn Together.
                     </h2>
-                    <p className="text-lg text-center text-muted-foreground max-w-lg">
+                    <p className="text-md sm:text-lg text-center text-muted-foreground w-full sm:max-w-lg">
                         Showcase your projects, get feedback, and collaborate
                         with others. Find projects to work on and build projects
                         you care about.
                     </p>
-                    <div className="flex flex-col gap-2 pt-6 px-2 max-w-lg z-10">
+                    <div className="flex flex-col gap-2 pt-6 px-2 sm:max-w-2xl z-10">
                         <Label htmlFor="email" className="font-semibold">
                             Join 1034 others on the waitlist.
                         </Label>
@@ -65,8 +68,8 @@ export default function Home() {
                                 id="email"
                                 type="email"
                                 placeholder="Enter your email"
-                                className="w-96"
                                 value={email}
+                                className="sm:w-60 md:w-96"
                                 onChange={(e) => setEmail(e.target.value)}
                             />
 
@@ -75,7 +78,7 @@ export default function Home() {
                                     {!showWaitlisted ? (
                                         <>
                                             <motion.span whileHover={{ x: -2 }}>
-                                                Join Waitlist
+                                                Join
                                             </motion.span>
                                             <motion.div whileHover={{ x: 6 }}>
                                                 <ChevronRightIcon size={20} />
@@ -106,7 +109,9 @@ export default function Home() {
                             </Button>
                         </div>
                         {error && (
-                            <p className="text-red-500 text-sm pl-2 -mt-1">{error}</p>
+                            <p className="text-red-500 text-sm pl-2 -mt-1">
+                                {error}
+                            </p>
                         )}
                     </div>
                 </div>
@@ -121,6 +126,24 @@ export default function Home() {
                         "inset-x-0 inset-y-[-30%] h-[200%] skew-y-12"
                     )}
                 />
+            </div>
+
+            {/* Features Section */}
+            <div
+                id="features"
+                className="flex flex-col bg-background w-full items-center justify-center mt-20 px-2"
+            >
+                <h2 className="text-xl font-bold text-center text-primary">
+                    features.
+                </h2>
+                <Features />
+            </div>
+
+            {/* Footer */}
+            <div className="flex flex-col items-center justify-center w-full bg-background mt-12 p-6">
+                <p className="text-md text-center text-muted-foreground">
+                    contribu. © 2024. All rights reserved.
+                </p>
             </div>
         </>
     );

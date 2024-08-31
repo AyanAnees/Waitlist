@@ -7,8 +7,8 @@ import { Poppins } from "next/font/google";
 const poppins = Poppins({ subsets: ["latin"], weight: ["500"] });
 
 export const metadata: Metadata = {
-  title: " | Waitlist",
-  description: "Waitlist for ...",
+  title: "contribu | waitlist",
+  description: "waitlist for contribu, a platform for finding and collaborating on projects.",
 };
 
 export default function RootLayout({
