@@ -136,6 +136,10 @@ export default function Home() {
                 <h2 className="text-xl font-bold text-center text-primary">
                     features.
                 </h2>
+                <p className="text-md text-center text-muted-foreground w-full sm:max-w-lg pt-4">
+                    contribu is a platform for finding and collaborating on
+                    projects. here are some of the features we offer.
+                </p>
                 <Features />
             </div>
 
