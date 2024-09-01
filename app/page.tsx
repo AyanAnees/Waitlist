@@ -10,6 +10,12 @@ import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import Features from "@/components/Features";
 
+import { createClient } from "@supabase/supabase-js";
+
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
+const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
+const supabase = createClient(supabaseUrl, supabaseKey);
+
 export default function Home() {
     const [subscribed, setSubscribed] = useState(false);
     const [showWaitlisted, setShowWaitlisted] = useState(false);
@@ -17,6 +23,24 @@ export default function Home() {
     const [first, setFirst] = useState("");
     const [last, setLast] = useState("");
     const [error, setError] = useState("");
+    const [number, setNumber] = useState<number | null>(0);
+
+    useEffect(() => {
+        const getWaitlistCount = async () => {
+            const { count, error } = await supabase
+                .from("waitlist")
+                .select("id", { count: "exact", head: true });
+
+            if (error) {
+                console.log("Error fetching waitlist count:", error.message);
+                return;
+            }
+
+            setNumber(count);
+        };
+
+        getWaitlistCount();
+    }, []);
 
     useEffect(() => {
         if (subscribed) {
@@ -32,46 +56,46 @@ export default function Home() {
     }, [subscribed]);
 
     const handleSubscribe = async () => {
-      // e.preventDefault();
-      if (!first || first.trim().length === 0) {
-        setError("First Name is required.");
-        return;
-      }
-      if (!email) {
-        setError("Please input a valid email.");
-        return;
-      }
-     
-      setError("");
-      // ! send api request here
-      try {
-        const res = await fetch("api/email", {
-          method: "POST",
-          body: JSON.stringify({
-            // ! change the following 
-            firstName: first,
-            lastName: last,
-            email: email,
-          }),
-        });
-        const data = await res.json();
-        // console.log(data);
-        if (!res.ok) {
-        //   console.log(data.error);
-        setError(data.error)
-          return;
+        // e.preventDefault();
+        if (!first || first.trim().length === 0) {
+            setError("First Name is required.");
+            return;
         }
-        // console.log(data);
-        // console.log(email);
-        setSubscribed(true);
-        setFirst("");
-        setLast("");
-        setEmail("");
-        if (subscribed) return;
-      } catch (error) {
-        console.log("Error", error);
-        setError("Unable to Join the waitlist");
-      }
+        if (!email) {
+            setError("Please input a valid email.");
+            return;
+        }
+
+        setError("");
+        // ! send api request here
+        try {
+            const res = await fetch("api/email", {
+                method: "POST",
+                body: JSON.stringify({
+                    // ! change the following
+                    firstName: first,
+                    lastName: last,
+                    email: email,
+                }),
+            });
+            const data = await res.json();
+            console.log(data);
+            if (data.status === 400) {
+                console.log(data.error);
+                setError(data.error);
+                return;
+            }
+            // console.log(data);
+            // console.log(email);
+            setSubscribed(true);
+            setFirst("");
+            setLast("");
+            setEmail("");
+            if (subscribed) return;
+        } catch (error) {
+            console.log("Error", error);
+            setError("Unable to Join the waitlist");
+        }
     };
 
     return (
@@ -94,7 +118,7 @@ export default function Home() {
                     </p>
                     <div className="flex flex-col gap-2 pt-6 px-2 sm:max-w-2xl z-10">
                         <Label htmlFor="email" className="font-semibold">
-                            Join 1034 others on the waitlist.
+                            Join {number} others on the waitlist.
                         </Label>
                         <div className="flex flex-row gap-2 items-center justify-start">
                             <Input
