@@ -14,6 +14,8 @@ export default function Home() {
     const [subscribed, setSubscribed] = useState(false);
     const [showWaitlisted, setShowWaitlisted] = useState(false);
     const [email, setEmail] = useState("");
+    const [first, setFirst] = useState("");
+    const [last, setLast] = useState("");
     const [error, setError] = useState("");
 
     useEffect(() => {
@@ -54,8 +56,8 @@ export default function Home() {
         setError(data.error)
           return;
         }
-        console.log(data);
-        console.log(email);
+        // console.log(data);
+        // console.log(email);
         setSubscribed(true);
         setEmail("");
         if (subscribed) return;
@@ -70,15 +72,15 @@ export default function Home() {
             <Header />
 
             {/* Hero Section */}
-            <div className="relative h-[500px] w-full  overflow-hidden bg-background p-6 sm:p-20 pt-16">
+            <div className="relative h-[550px] w-full  overflow-hidden bg-background p-6 sm:p-20 pt-16">
                 <div className="flex flex-col items-center justify-start gap-2 z-10">
                     <p className="text-md font-bold text-center w-full text-muted-foreground uppercase">
                         one-stop solution to build your project portfolio
                     </p>
-                    <h2 className="pointer-events-none lowercase whitespace-pre-wrap bg-gradient-to-b from-[#F97D26] via-[#ff2975] to-[#8c1eff] bg-clip-text text-center text-4xl sm:text-5xl font-bold tracking-tight text-transparent w-full sm:max-w-lg pb-8">
+                    <h2 className="pointer-events-none lowercase whitespace-pre-wrap bg-gradient-to-b from-[#F97D26] via-[#ff2975] to-[#8c1eff] bg-clip-text text-center text-4xl sm:text-5xl font-bold tracking-tight text-transparent max-w-lg pb-8">
                         Innovate Together, Learn Together.
                     </h2>
-                    <p className="text-md sm:text-lg text-center text-muted-foreground w-full sm:max-w-lg">
+                    <p className="text-sm sm:text-lg text-center text-muted-foreground max-w-xl sm:max-w-2xl">
                         Showcase your projects, get feedback, and collaborate
                         with others. Find projects to work on and build projects
                         you care about.
@@ -87,13 +89,29 @@ export default function Home() {
                         <Label htmlFor="email" className="font-semibold">
                             Join 1034 others on the waitlist.
                         </Label>
+                        <div className="flex flex-row gap-2 items-center justify-start">
+                            <Input
+                                id="first"
+                                type="text"
+                                placeholder="First Name"
+                                value={first}
+                                onChange={(e) => setFirst(e.target.value)}
+                            />
+                            <Input
+                                id="last"
+                                type="text"
+                                placeholder="Last Name"
+                                value={last}
+                                onChange={(e) => setLast(e.target.value)}
+                            />
+                        </div>
                         <div className="flex flex-row gap-2 items-center justify-center">
                             <Input
                                 id="email"
                                 type="email"
                                 placeholder="Enter your email"
                                 value={email}
-                                className="sm:w-60 md:w-96"
+                                className="w-full"
                                 onChange={(e) => setEmail(e.target.value)}
                             />
 
