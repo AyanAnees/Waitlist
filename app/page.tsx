@@ -34,7 +34,7 @@ export default function Home() {
     const handleSubscribe = async () => {
       // e.preventDefault();
       if (!first || first.trim().length === 0) {
-        setError("First Name is Required.");
+        setError("First Name is required.");
         return;
       }
       if (!email) {
@@ -64,6 +64,8 @@ export default function Home() {
         // console.log(data);
         // console.log(email);
         setSubscribed(true);
+        setFirst("");
+        setLast("");
         setEmail("");
         if (subscribed) return;
       } catch (error) {

@@ -41,9 +41,9 @@ export async function POST(req: Request) {
     // * sending the email to the user
     console.log('here')
     const { data, error } = await resend.emails.send({
-      from: process.env.FROM_EMAIL,
+      from: process.env.FROM_EMAIL || "",
       // ! comment the following
-      to: [ process.env.TO_EMAIL,],
+      to: [ process.env.TO_EMAIL || "",],
       // to: [email],
       // ! Change the subject
       subject: "You're In! Welcome to the Contribu Waitlist!",
