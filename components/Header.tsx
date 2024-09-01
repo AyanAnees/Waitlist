@@ -27,7 +27,7 @@ const Header = () => {
             </div>
             <nav className="ml-auto">
                 <ul className="flex flex-row gap-6 sm:gap-12 text-muted-foreground">
-                    <li>about.</li>
+                    {/* <li>about.</li> */}
                     <li className="cursor-pointer" onClick={goToFeatures}>
                         features.
                     </li>
