@@ -29,18 +29,40 @@ export default function Home() {
         }
     }, [subscribed]);
 
-    const handleSubscribe = () => {
-        if (!email) {
-            setError("Please input a valid email.");
-            return;
+    const handleSubscribe = async () => {
+      // e.preventDefault();
+      if (!email) {
+        setError("Please input a valid email.");
+        return;
+      }
+      setError("");
+      // ! send api request here
+      try {
+        const res = await fetch("api/email", {
+          method: "POST",
+          body: JSON.stringify({
+            // ! change the following 
+            firstName: "firstName",
+            lastName: "lastName",
+            email: email,
+          }),
+        });
+        const data = await res.json();
+        // console.log(data);
+        if (!res.ok) {
+        //   console.log(data.error);
+        setError(data.error)
+          return;
         }
-        setError("")
-        // ! send api request here
-        if (subscribed) return;
-
+        console.log(data);
         console.log(email);
         setSubscribed(true);
         setEmail("");
+        if (subscribed) return;
+      } catch (error) {
+        console.log("Error", error);
+        setError("Unable to Join the waitlist");
+      }
     };
 
     return (

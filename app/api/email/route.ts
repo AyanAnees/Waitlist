@@ -4,9 +4,9 @@ import { NextResponse } from "next/server";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-async function POST(req: Request) {
+export async function POST(req: Request) {
   const { firstName, lastName, email } = await req.json();
-  //* do validation here
+  // * do validation here
   if (
     !firstName ||
     typeof firstName !== "string" ||
@@ -29,6 +29,7 @@ async function POST(req: Request) {
   }
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!email || typeof email !== "string" || !emailRegex.test(email)) {
+    console.log("invalid email")
     return NextResponse.json(
       { error: "A valid email address is required." },
       { status: 400 }
@@ -38,12 +39,14 @@ async function POST(req: Request) {
 
   try {
     // * sending the email to the user
+    console.log('here')
     const { data, error } = await resend.emails.send({
-      from: "Acme <onboarding@resend.dev>",
-      to: ["delivered@resend.dev"],
+      from: process.env.FROM_EMAIL,
+      // ! comment the following
+      to: [ process.env.TO_EMAIL,],
       // to: [email],
       // ! Change the subject
-      subject: "You're In! Welcome to the Student Innovator Hub Waitlist!",
+      subject: "You're In! Welcome to the Contribu Waitlist!",
       react: EmailTemplate({ firstName: firstName, lastName: lastName }),
     });
     if (error) {
