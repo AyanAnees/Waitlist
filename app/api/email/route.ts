@@ -17,19 +17,19 @@ export async function POST(req: Request) {
       { status: 400 }
     );
   }
-  if (
-    !lastName ||
-    typeof lastName !== "string" ||
-    lastName.trim().length === 0
-  ) {
-    return NextResponse.json(
-      { error: "Last name is required" },
-      { status: 400 }
-    );
-  }
+  // if (
+  //   !lastName ||
+  //   typeof lastName !== "string" ||
+  //   lastName.trim().length === 0
+  // ) {
+  //   return NextResponse.json(
+  //     { error: "Last name is required" },
+  //     { status: 400 }
+  //   );
+  // }
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!email || typeof email !== "string" || !emailRegex.test(email)) {
-    console.log("invalid email")
+    // console.log("invalid email")
     return NextResponse.json(
       { error: "A valid email address is required." },
       { status: 400 }

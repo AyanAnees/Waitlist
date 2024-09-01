@@ -33,10 +33,15 @@ export default function Home() {
 
     const handleSubscribe = async () => {
       // e.preventDefault();
+      if (!first || first.trim().length === 0) {
+        setError("First Name is Required.");
+        return;
+      }
       if (!email) {
         setError("Please input a valid email.");
         return;
       }
+     
       setError("");
       // ! send api request here
       try {
@@ -44,8 +49,8 @@ export default function Home() {
           method: "POST",
           body: JSON.stringify({
             // ! change the following 
-            firstName: "firstName",
-            lastName: "lastName",
+            firstName: first,
+            lastName: last,
             email: email,
           }),
         });
