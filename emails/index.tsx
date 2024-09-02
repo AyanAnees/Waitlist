@@ -7,6 +7,7 @@ import {
     Font,
     Hr,
     Container,
+    Text,
 } from "@react-email/components";
 import { Merge } from "lucide-react";
 
@@ -46,7 +47,7 @@ export default function EmailTemplate({
             </Head>
             <Html>
                 <Body className="text-slate-800 leading-relaxed md:py-8 bg-slate-100">
-                    <Container className="bg-white px-4 md:px-8 pb-4">
+                    <Container className="bg-white px-4 md:px-8 pb-4 font-poppins">
                         <div className="flex flex-row items-center gap-2 justify-center">
                             <Merge
                                 className="text-[#f97316]"
@@ -56,40 +57,49 @@ export default function EmailTemplate({
                             <h1 className="text-4xl">contribu.</h1>
                         </div>
                         <Hr />
-                        <p className="font-poppins">Welcome {firstName}!</p>
-                        <p>
+                        <Text className="text-base">Welcome {firstName}!</Text>
+                        <Text className="text-base">
                             Thank you for joining the waitlist for{" "}
                             <span className="font-bold">contribu</span>
                             —your one-stop solution to build your project
                             portfolio!
-                        </p>
-                        <p>
+                        </Text>
+                        <Text className="text-base">
                             We’re thrilled to have you on board and can't wait
                             to see the amazing projects you'll showcase, the
                             feedback you'll give and receive, and the new
                             collaborations you'll form.
-                        </p>
+                        </Text>
                         <h1 className="text-2xl">What’s Next?</h1>
-                        <p>
+                        <Text className="text-base">
                             As a member of our early community, you'll be among
                             the first to:
-                        </p>
-                        <ul className="leading-loose">
+                        </Text>
+                        <ul className="leading-tight">
                             <li>
-                                <span className="font-bold">Discover</span> new
-                                projects to work on and contribute to.
+                                <Text className="text-base">
+                                    <span className="font-bold">Discover</span>{" "}
+                                    new projects to work on and contribute to.
+                                </Text>
                             </li>
                             <li>
-                                <span className="font-bold">Connect</span> with
-                                other developers who share your passion.
+                                <Text className="text-base">
+                                    <span className="font-bold">Connect</span>{" "}
+                                    with other developers who share your
+                                    passion.
+                                </Text>
                             </li>
                             <li>
-                                <span className="font-bold">Get access</span> to
-                                features designed to make collaboration and
-                                learning easier and more effective.
+                                <Text className="text-base">
+                                    <span className="font-bold">
+                                        Get access
+                                    </span>{" "}
+                                    to features designed to make collaboration
+                                    and learning easier and more effective.
+                                </Text>
                             </li>
                         </ul>
-                        <p className="whitespace-pre-line">
+                        <Text className="whitespace-pre-line text-base">
                             Stay tuned for more updates! We’ll be sending you an
                             invite soon so you can start innovating, learning,
                             and building with the community.{"\n\n"}In the
@@ -98,10 +108,10 @@ export default function EmailTemplate({
                             more, the merrier!
                             {"\n\n"}Thank you for being a part of our journey.
                             We can't wait to see what we build together!
-                        </p>
-                        <p className="whitespace-pre-line">
+                        </Text>
+                        <Text className="whitespace-pre-line text-base">
                             Best regards,{"\n"}The Contribu Team
-                        </p>
+                        </Text>
                     </Container>
                     <p className="text-center text-xs">© 2024 | contribu</p>
                 </Body>
