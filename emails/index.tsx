@@ -115,7 +115,7 @@ export default function EmailTemplate({
                             Best regards,{"\n"}The Contribu Team
                         </Text>
                     </Container>
-                    <Text className="text-base text-center text-xs">
+                    <Text className="text-center text-xs">
                         contribu. © 2024. All rights reserved.
                     </Text>
                 </Body>
