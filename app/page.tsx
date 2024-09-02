@@ -27,20 +27,22 @@ export default function Home() {
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        const getWaitlistCount = async () => {
-            const { count, error } = await supabase
-                .from("waitlist")
-                .select("id", { count: "exact", head: true });
+      const getWaitlistCount = async () => {
+        try {
+          const response = await fetch("/api/count");
+          const data = await response.json();
 
-            if (error) {
-                // console.log("Error fetching waitlist count:", error.message);
-                return;
-            }
+          if (response.ok) {
+            setNumber(data.count);
+          } else {
+            // console.error("Error fetching waitlist count:", data.error);
+          }
+        } catch (error) {
+        //   console.error("Error fetching waitlist count:", error);
+        }
+      };
 
-            setNumber(count);
-        };
-
-        getWaitlistCount();
+      getWaitlistCount();
     }, []);
 
     useEffect(() => {
@@ -121,7 +123,7 @@ export default function Home() {
                     </p>
                     <div className="flex flex-col gap-2 pt-6 px-2 sm:max-w-2xl z-10">
                         <Label htmlFor="email" className="font-semibold">
-                            Join {number} others on the waitlist.
+                            Join {number? `${number}+`:""} others on the waitlist.
                         </Label>
                         <div className="flex flex-row gap-2 items-center justify-start">
                             <Input
