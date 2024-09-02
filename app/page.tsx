@@ -33,7 +33,7 @@ export default function Home() {
                 .select("id", { count: "exact", head: true });
 
             if (error) {
-                console.log("Error fetching waitlist count:", error.message);
+                // console.log("Error fetching waitlist count:", error.message);
                 return;
             }
 
@@ -90,13 +90,13 @@ export default function Home() {
 
             setLoading(false);
 
-            console.log("Successful: ", data);
+            // console.log("Successful: ", data);
             setSubscribed(true);
             setFirst("");
             setLast("");
             setEmail("");
         } catch (error) {
-            console.log("Error", error);
+            // console.log("Error", error);
             setError("Unable to join the waitlist. Try again.");
         }
     };
