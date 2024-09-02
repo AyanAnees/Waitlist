@@ -76,9 +76,8 @@ export default function Home() {
             const res = await fetch("api/email", {
                 method: "POST",
                 body: JSON.stringify({
-                    // ! change the following
-                    firstName: first,
-                    lastName: last,
+                    firstName: first.charAt(0).toUpperCase() + first.slice(1).toLowerCase(),
+                    lastName: last.charAt(0).toUpperCase() + last.slice(1).toLowerCase(),
                     email: email,
                 }),
             });
