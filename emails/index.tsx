@@ -60,7 +60,9 @@ export default function EmailTemplate({
                         <Text className="text-base">Welcome {firstName}!</Text>
                         <Text className="text-base">
                             Thank you for joining the waitlist for{" "}
-                            <span className="font-bold">contribu</span>
+                            <span className="text-[#f97316] font-bold">
+                                contribu
+                            </span>
                             —your one-stop solution to build your project
                             portfolio!
                         </Text>
@@ -113,7 +115,9 @@ export default function EmailTemplate({
                             Best regards,{"\n"}The Contribu Team
                         </Text>
                     </Container>
-                    <p className="text-center text-xs">© 2024 | contribu</p>
+                    <p className="text-center text-xs">
+                        contribu. © 2024. All rights reserved.
+                    </p>
                 </Body>
             </Html>
         </Tailwind>
