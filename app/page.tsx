@@ -4,7 +4,7 @@ import AnimatedGridPattern from "@/components/magicui/animated-grid-pattern";
 import { cn } from "@/lib/utils";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { CheckIcon, ChevronRightIcon } from "lucide-react";
+import { CheckIcon, ChevronRightIcon, LoaderCircle } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
@@ -24,6 +24,7 @@ export default function Home() {
     const [last, setLast] = useState("");
     const [error, setError] = useState("");
     const [number, setNumber] = useState<number | null>(0);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         const getWaitlistCount = async () => {
@@ -58,7 +59,7 @@ export default function Home() {
     const handleSubscribe = async () => {
         // e.preventDefault();
         if (!first || first.trim().length === 0) {
-            setError("First Name is required.");
+            setError("First name is required.");
             return;
         }
         if (!email) {
@@ -69,6 +70,7 @@ export default function Home() {
         setError("");
         // ! send api request here
         try {
+            setLoading(true);
             const res = await fetch("api/email", {
                 method: "POST",
                 body: JSON.stringify({
@@ -79,22 +81,23 @@ export default function Home() {
                 }),
             });
             const data = await res.json();
-            console.log(data);
-            if (data.status === 400) {
-                console.log(data.error);
-                setError(data.error);
+
+            if (!res.ok) {
+                setError(data.error || "Unable to join the waitlist. Try again.");
+                setLoading(false);
                 return;
             }
-            // console.log(data);
-            // console.log(email);
+
+            setLoading(false);
+
+            console.log("Successful: ", data);
             setSubscribed(true);
             setFirst("");
             setLast("");
             setEmail("");
-            if (subscribed) return;
         } catch (error) {
             console.log("Error", error);
-            setError("Unable to Join the waitlist");
+            setError("Unable to join the waitlist. Try again.");
         }
     };
 
@@ -148,7 +151,9 @@ export default function Home() {
 
                             <Button onClick={handleSubscribe}>
                                 <motion.div className="flex flex-row items-center justify-center gap-3">
-                                    {!showWaitlisted ? (
+                                    {loading ? (
+                                      <LoaderCircle size={20} className="animate-spin"/>
+                                    ) : !showWaitlisted ? (
                                         <>
                                             <motion.span whileHover={{ x: -2 }}>
                                                 Join
