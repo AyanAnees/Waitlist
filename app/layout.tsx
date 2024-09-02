@@ -7,18 +7,19 @@ const inter = Inter({ subsets: ["latin"] });
 const poppins = Poppins({ subsets: ["latin"], weight: ["500"] });
 
 export const metadata: Metadata = {
-  title: "contribu | waitlist",
-  description: "waitlist for contribu, a platform for finding and collaborating on projects.",
+    title: "contribu | waitlist",
+    description:
+        "waitlist for contribu, a platform for finding and collaborating on projects.",
 };
 
 export default function RootLayout({
-  children,
+    children,
 }: Readonly<{
-  children: React.ReactNode;
+    children: React.ReactNode;
 }>) {
-  return (
-    <html lang="en">
-      <body className={`${poppins.className}`}>{children}</body>
-    </html>
-  );
+    return (
+        <html lang="en">
+            <body className={`${poppins.className}`}>{children}</body>
+        </html>
+    );
 }
