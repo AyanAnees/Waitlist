@@ -32,7 +32,7 @@ const Features = () => {
             Icon: MessageCircleCode,
             name: "collaborate with others.",
             description:
-                "Send feedback, request to collaborate, and learn from others.",
+                "Send feedback, collaborate, and learn from others.",
             background: (
                 <div className="absolute right-0 top-4 h-[200px] w-[600px] [mask-image:linear-gradient(to_top,transparent_10%,#000_100%)] border-none opacity-60"></div>
             ),

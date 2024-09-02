@@ -27,22 +27,22 @@ export default function Home() {
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-      const getWaitlistCount = async () => {
-        try {
-          const response = await fetch("/api/count");
-          const data = await response.json();
+        const getWaitlistCount = async () => {
+            try {
+                const response = await fetch("/api/count");
+                const data = await response.json();
 
-          if (response.ok) {
-            setNumber(data.count);
-          } else {
-            // console.error("Error fetching waitlist count:", data.error);
-          }
-        } catch (error) {
-        //   console.error("Error fetching waitlist count:", error);
-        }
-      };
+                if (response.ok) {
+                    setNumber(data.count);
+                } else {
+                    // console.error("Error fetching waitlist count:", data.error);
+                }
+            } catch (error) {
+                //   console.error("Error fetching waitlist count:", error);
+            }
+        };
 
-      getWaitlistCount();
+        getWaitlistCount();
     }, []);
 
     useEffect(() => {
@@ -85,7 +85,9 @@ export default function Home() {
             const data = await res.json();
 
             if (!res.ok) {
-                setError(data.error || "Unable to join the waitlist. Try again.");
+                setError(
+                    data.error || "Unable to join the waitlist. Try again."
+                );
                 setLoading(false);
                 return;
             }
@@ -123,7 +125,8 @@ export default function Home() {
                     </p>
                     <div className="flex flex-col gap-2 pt-6 px-2 sm:max-w-2xl z-10">
                         <Label htmlFor="email" className="font-semibold">
-                            Join {number? `${number}+`:""} others on the waitlist.
+                            Join {number ? `${number}+` : ""} others on the
+                            waitlist.
                         </Label>
                         <div className="flex flex-row gap-2 items-center justify-start">
                             <Input
@@ -154,7 +157,10 @@ export default function Home() {
                             <Button onClick={handleSubscribe}>
                                 <motion.div className="flex flex-row items-center justify-center gap-3">
                                     {loading ? (
-                                      <LoaderCircle size={20} className="animate-spin"/>
+                                        <LoaderCircle
+                                            size={20}
+                                            className="animate-spin"
+                                        />
                                     ) : !showWaitlisted ? (
                                         <>
                                             <motion.span whileHover={{ x: -2 }}>
@@ -221,6 +227,65 @@ export default function Home() {
                     projects. here are some of the features we offer.
                 </p>
                 <Features />
+            </div>
+
+            <div className="flex flex-col sm:flex-row sm:gap-16 bg-background w-full items-center justify-center mt-20 px-4">
+                <h2 className="text-xl sm:text-3xl font-bold text-center text-primary">
+                    about.
+                </h2>
+                <p className="text-md text-center sm:text-start text-muted-foreground w-full sm:max-w-xl pt-4">
+                    contribu is a platform for students to come together and
+                    turn ideas into reality. whether you&apos;re an aspiring
+                    entrepreneur, developer, or artist,{" "}
+                    <span className="text-primary">contribu</span> connects you
+                    with like-minded peers to collaborate on projects and make a
+                    difference.
+                </p>
+            </div>
+
+            <div className="flex flex-col-reverse sm:flex-row sm:gap-16 bg-background w-full items-center justify-center mt-20 px-4">
+                <p className="text-md text-center sm:text-start text-muted-foreground w-full sm:max-w-xl pt-4">
+                    at <span className="text-primary">contribu</span>, our
+                    mission is to empower students by providing a collaborative
+                    space where ideas flourish and talents are discovered.
+                    we&apos;re committed to fostering a culture of innovation
+                    and inclusivity, where every voice is heard, and every idea
+                    is valued.
+                </p>
+                <h2 className="text-xl sm:text-3xl font-bold text-center text-primary">
+                    mission.
+                </h2>
+            </div>
+
+            <div className="flex flex-col sm:flex-row sm:gap-16 bg-background w-full items-center justify-center mt-20 mb-16 px-4">
+                <h2 className="text-xl sm:text-3xl font-bold text-center text-primary">
+                    why join?
+                </h2>
+                <ul className="list-disc text-md text-start text-muted-foreground w-full sm:max-w-xl pt-4">
+                    <li className="ml-4">
+                        <span className="text-primary">early access:</span> be
+                        among the first to explore and benefit from the
+                        platform.
+                    </li>
+                    <li className="ml-4">
+                        <span className="text-primary">
+                            build your portfolio:
+                        </span>{" "}
+                        showcase your projects and build a strong portfolio.
+                    </li>
+                    <li className="ml-4">
+                        <span className="text-primary">collaborate:</span> find
+                        projects to work on and collaborate with others.
+                    </li>
+                    <li className="ml-4">
+                        <span className="text-primary">feedback:</span> provide
+                        feedback and shape the future of the platform.
+                    </li>
+                    <li className="ml-4">
+                        <span className="text-primary">offers:</span> get
+                        exclusive offers and discounts as a waitlist member.
+                    </li>
+                </ul>
             </div>
 
             {/* Footer */}
