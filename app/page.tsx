@@ -218,7 +218,7 @@ export default function Home() {
                 id="features"
                 className="flex flex-col bg-background w-full items-center justify-center mt-20 px-2"
             >
-                <h2 className="text-xl font-bold text-center text-primary">
+                <h2 className="text-xl sm:text-3xl font-bold text-center text-primary">
                     features.
                 </h2>
                 <p className="text-md text-center text-muted-foreground w-full sm:max-w-lg pt-4">
